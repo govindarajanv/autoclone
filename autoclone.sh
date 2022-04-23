@@ -7,6 +7,14 @@ proxies=(   "https://dummyproxy.com:1234" # India proxy
         )
 
 COUNTER=0
+read -p "Enter your name:" name
+
+read -p "Enter your company email:" email
+email_domain=$(echo $email | awk -F '@' '{print $NF}')
+if [ $email_domain != "gmail.com" ]; then 
+    echo -e "\nEmail domain validation not successful"
+    exit 1
+fi
 read -p "Enter repo url to be cloned: " repo
 
 if [[ $repo =~ ^https://github.com/.*/.*.git$ ]]; then 
@@ -22,6 +30,19 @@ for str in ${proxies[@]}; do
 if (( $? == 0 )); then
     echo -e "proxy $str works\n"
     echo -e "repo $repo is cloned successfully\n"
+
+    user_name=$(git config user.name)
+    if [[ -z "${user_name}" ]]; then
+       echo "Setting user name in git config"
+       git config user.name $name
+    fi
+   
+    user_email=$(git config user.email)
+    if [[ -z "${user_email}" ]]; then
+       echo "Setting user email in git config"
+       git config user.email $email
+    fi
+
     break
 else
     echo "proxy $str does not work."
