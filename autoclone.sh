@@ -1,7 +1,7 @@
 #!/bin/bash
 
-proxies=(   "https://dummyproxy.com:1234" 
-            "https://dummyproxy.com:1233" 
+proxies=(   "https://dummyproxy.com:1234" # India proxy
+            "https://dummyproxy.com:1233" # Different geography
             "https://dummyproxy.com:1235" 
             "https://dummyproxy.com:1236"
         )
