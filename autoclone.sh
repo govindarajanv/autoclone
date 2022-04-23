@@ -7,7 +7,14 @@ proxies=(   "https://dummyproxy.com:1234" # India proxy
         )
 
 COUNTER=0
-repo=$1
+read -p "Enter repo url to be cloned: " repo
+regex="(https?)://github.com/govindarajanv/.*.git"
+if [[ $repo =~ ^https://github.com/.*/.*.git$ ]]; then 
+    echo -e "\nurl validation is successful for $repo "
+else
+    echo -e "\nplease enter a valid git repo"
+    exit 1
+fi
 echo -e "\nAvailable number of proxies: ${#proxies[@]}\n"
 for str in ${proxies[@]}; do
   echo -e "checking if the proxy url $str works...\n"
