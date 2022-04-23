@@ -32,5 +32,5 @@ echo -e "\n"
 done
 
 if [ $COUNTER -eq ${#proxies[@]} ]; then
-    echo -e "None of the proxies worked.Please contact the trainer\n"
+    echo -e "None of the proxies worked.Please contact the trainer or core team\n"
 fi
